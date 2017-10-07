@@ -10,7 +10,7 @@ namespace SnakeMess
     {
 	    private bool _goodGame = false;
 	    private bool _pause = false; 
-		//private bool inUse = false;
+		private bool _inUse = false;
 	    private List<ConsolePoint> _snake;
 	    private ConsolePoint _apple;
 	    private ConsolePoint _snakeHead;
@@ -63,6 +63,20 @@ namespace SnakeMess
 		    return applePoints;
 	    }
 
+	    public void checkSnakeDeath()
+	    {
+		    _snake.RemoveAt(0);
+
+		    foreach (Point x in _snake)
+		    {
+			    if (x.X == _snakeHead.X && x.Y == _snakeHead.Y) {
+				    // Death by accidental self-cannibalism.
+				    _goodGame = true;
+				    break;
+			    }   
+		    }
+	    }
+
 	    public void PlayGame()
 	    {
 		    if (_timer.ElapsedMilliseconds < 100)
@@ -99,56 +113,33 @@ namespace SnakeMess
 				    // No more room to place apples - game over.
 				    _goodGame = true;
 			    else {
-				    while (true) {
-					    app.X = rng.Next(0, boardW); app.Y = rng.Next(0, boardH);
-					    bool found = true;
-					    foreach (Point i in snake)
-						    if (i.X == app.X && i.Y == app.Y) {
-							    found = false;
-							    break;
-						    }
-					    if (found) {
-						    inUse = true;
-						    break;
-					    }
-				    }
+				    SetApple();
+				    _inUse = true;
 			    }
 		    }
-		    if (!inUse) {
-			    snake.RemoveAt(0);
-			    foreach (Point x in snake)
-				    if (x.X == newH.X && x.Y == newH.Y) {
-					    // Death by accidental self-cannibalism.
-					    gg = true;
-					    break;
-				    }
+		    
+		    if (!_inUse) {
+			    checkSnakeDeath();
 		    }
-		    if (!gg) {
-						
-			    Console.ForegroundColor = ConsoleColor.Yellow;
-			    Console.SetCursorPosition(head.X, head.Y); 
-			    Console.Write("0");
-						
-			    if (!inUse) {
-							
-				    Console.SetCursorPosition(tail.X, tail.Y); 
-				    Console.Write(" ");
-							
+		    
+		    if (!_goodGame) {
+			    
+			    _console.writeConsolePoint(false, head.X, head.Y, "0");
+			    
+			    if (!_inUse) {
+				    
+				    _console.writeConsolePoint(tail.X, tail.Y, " ");
+				    
 			    } else {
-							
-				    Console.ForegroundColor = ConsoleColor.Green; 
-				    Console.SetCursorPosition(app.X, app.Y); 
-				    Console.Write("$");
-				    inUse = false;
-							
+				    
+				    _console.writeConsolePoint(true, _apple.X, _apple.Y, "$");
+				    _inUse = false;
+				    
 			    }
-						
-			    snake.Add(newH);
-			    Console.ForegroundColor = ConsoleColor.Yellow; 
-			    Console.SetCursorPosition(newH.X, newH.Y); 
-			    Console.Write("@");
-			    last = newDir;
-						
+			    
+			    _snake.Add(newH);
+			    _console.writeConsolePoint(false, newH.X, newH.Y, "@");
+			    
 		    }
 	    }
 
