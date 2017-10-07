@@ -17,7 +17,8 @@ namespace SnakeMess
 	    private int _newDir;
 	    private Console _console;
 	    private Stopwatch _timer;
-
+	    
+		// Sets the snake body when game is initilized
 	    private void SetSnake()
 	    {
 		    _snake = new List<ConsolePoint>();
@@ -28,6 +29,7 @@ namespace SnakeMess
 		    _snake.Add(new ConsolePoint());
 	    }
 
+	    // Sets apple in an open position
 	    private void SetApple()
 	    {
 		    int[] applePoints = VerifyApplePosition();
@@ -35,6 +37,7 @@ namespace SnakeMess
 		    _console.writeConsolePoint(true, _apple.X, _apple.Y, "$");
 	    }
 
+	    // Verifies that the position of the apple is available
 	    private int[] VerifyApplePosition()
 	    {
 		    Random rng = new Random();
@@ -49,7 +52,7 @@ namespace SnakeMess
 
 			    foreach (ConsolePoint i in _snake)
 			    {
-				    if (i.X == applePoints[0] && i.Y == applePoints[1])
+				    if ( i.X == applePoints[0] && i.Y == applePoints[1])
 				    {
 					    appleCanBePlaced = false;
 					    break;
@@ -63,13 +66,15 @@ namespace SnakeMess
 		    return applePoints;
 	    }
 
+	    // Checks if the snake has eaten itself 
 	    public void checkSnakeDeath()
 	    {
 		    _snake.RemoveAt(0);
 
 		    foreach (Point x in _snake)
 		    {
-			    if (x.X == _snakeHead.X && x.Y == _snakeHead.Y) {
+			    if (ConsolePoint.CompareTwoPoints( x , _snakeHead ))
+			    {
 				    // Death by accidental self-cannibalism.
 				    _goodGame = true;
 				    break;
@@ -77,8 +82,10 @@ namespace SnakeMess
 		    }
 	    }
 
+	    // Intial game method for class SnakeGame
 	    public void PlayGame()
 	    {
+		    // Resets the timer every time so the console only writes every 100milisecond
 		    if (_timer.ElapsedMilliseconds < 100)
 			    continue;
 		    _timer.Restart();
@@ -87,6 +94,7 @@ namespace SnakeMess
 		    ConsolePoint head = new ConsolePoint(_snake.Last());
 		    ConsolePoint newH = new ConsolePoint(head);
 					
+		    // New direction for the snake if keystrokes have been made
 		    switch (_newDir) {
 			    case 0:
 				    newH.Y -= 1;
@@ -102,13 +110,16 @@ namespace SnakeMess
 				    break;
 		    }
 					
+		    // Checks if the snake has gone of bound 
 		    if (newH.X < 0 || newH.X >= _console.BoardWidth)
 			    _goodGame = true;
-					
+			
+		    // Checks if the snake has gone of bound
 		    else if (newH.Y < 0 || newH.Y >= _console.BoardHeight)
 			    _goodGame = true;
 					
-		    if (newH.X == _apple.X && newH.Y == _apple.Y) {
+		    // Checks if the snake head and apple has the same positon (snake has eaten apple)
+		    if (ConsolePoint.CompareTwoPoints( newH, _apple )) {
 			    if (_snake.Count + 1 >= _console.BoardWidth * _console.BoardHeight)
 				    // No more room to place apples - game over.
 				    _goodGame = true;
@@ -122,27 +133,33 @@ namespace SnakeMess
 			    checkSnakeDeath();
 		    }
 		    
+		    // If game is not over, coninue writing to console
 		    if (!_goodGame) {
 			    
+			    // writes a new body part at the head of the snake
 			    _console.writeConsolePoint(false, head.X, head.Y, "0");
 			    
 			    if (!_inUse) {
 				    
+				    // Writes a empty tail, so the snake looks to be same size as earlier
 				    _console.writeConsolePoint(tail.X, tail.Y, " ");
 				    
 			    } else {
 				    
+				    // writes a apple if the snake has just eaten one 
 				    _console.writeConsolePoint(true, _apple.X, _apple.Y, "$");
 				    _inUse = false;
 				    
 			    }
 			    
+			    // Addes a new head to the snake given that we overwrote the old on earlier
 			    _snake.Add(newH);
 			    _console.writeConsolePoint(false, newH.X, newH.Y, "@");
 			    
 		    }
 	    }
 
+	    // Sets game objects 
 	    public SnakeGame()
 		{	
 			SetSnake();
