@@ -15,7 +15,7 @@ namespace SnakeMess
 	    private ConsolePoint _apple;
 	    private ConsolePoint _snakeHead;
 	    private int _newDir;
-	    private Console _console;
+	    private GameConsole _console;
 	    private Stopwatch _timer;
 	    
 		// Sets the snake body when game is initilized
@@ -71,7 +71,7 @@ namespace SnakeMess
 	    {
 		    _snake.RemoveAt(0);
 
-		    foreach (Point x in _snake)
+		    foreach (ConsolePoint x in _snake)
 		    {
 			    if (ConsolePoint.CompareTwoPoints( x , _snakeHead ))
 			    {
@@ -87,7 +87,10 @@ namespace SnakeMess
 	    {
 		    // Resets the timer every time so the console only writes every 100milisecond
 		    if (_timer.ElapsedMilliseconds < 100)
+		    {
 			    continue;
+		    }
+
 		    _timer.Restart();
 					
 		    ConsolePoint tail = new ConsolePoint(_snake.First());
@@ -164,7 +167,7 @@ namespace SnakeMess
 		{	
 			SetSnake();
 			SetApple();
-			_console = new Console();
+			_console = new GameConsole();
 			
 			_timer = new Stopwatch();
 			_timer.Start();
