@@ -2,7 +2,7 @@
 
 namespace SnakeMess
 {    
-    public class Console
+    public class GameConsole
     {
 
         private int _width;
@@ -23,7 +23,7 @@ namespace SnakeMess
         }
 
         // Initial method that sets game elements
-        public Console() 
+        public GameConsole() 
         {
             Console.CursorVisible = false;
             Console.Title = "Westerdals Oslo ACT - SNAKE";
