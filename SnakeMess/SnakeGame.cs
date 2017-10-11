@@ -178,12 +178,14 @@ namespace SnakeMess
 		// Sets game objects 
 		public SnakeGame()
 		{
-			SetSnake();
-			SetApple();
+			
 			_console = new GameConsole();
+			
 
 			_timer = new Stopwatch();
 			_timer.Start();
+			SetSnake();
+			SetApple();
 
 			while (!_goodGame)
 			{
