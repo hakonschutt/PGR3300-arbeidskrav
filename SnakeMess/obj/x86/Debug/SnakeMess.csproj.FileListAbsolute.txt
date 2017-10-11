@@ -15,3 +15,9 @@ C:/_MyStuff_/Westerdals Oslo ACT/PG3300_SoftwareDesign/Innlevering_Eksamen/Arbei
 /Users/hakonschutt/Skole/Semester 3/Software Design/PGR3300-arbeidskrav/SnakeMess/obj/x86/Debug/SnakeMess.csproj.CoreCompileInputs.cache
 /Users/hakonschutt/Skole/Semester 3/Software Design/PGR3300-arbeidskrav/SnakeMess/obj/x86/Debug/SnakeMess.exe
 /Users/hakonschutt/Skole/Semester 3/Software Design/PGR3300-arbeidskrav/SnakeMess/obj/x86/Debug/SnakeMess.pdb
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\bin\Debug\SnakeMess.exe
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\bin\Debug\SnakeMess.pdb
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\obj\x86\Debug\SnakeMess.csprojResolveAssemblyReference.cache
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\obj\x86\Debug\SnakeMess.csproj.CoreCompileInputs.cache
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\obj\x86\Debug\SnakeMess.exe
+C:\Users\Endre\OneDrive\Documents\Westerdals\SecondYear\Autumn_2017\PG3300\Arbeidskrav\PGR3300-arbeidskrav\SnakeMess\obj\x86\Debug\SnakeMess.pdb
