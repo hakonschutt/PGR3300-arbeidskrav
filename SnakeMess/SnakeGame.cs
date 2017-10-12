@@ -30,7 +30,7 @@ namespace SnakeMess
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            bool elapsedTime;
+            //bool elapsedTime;
 
             while (!_endGame)
             {
@@ -44,8 +44,12 @@ namespace SnakeMess
                     if (timer.ElapsedMilliseconds < 100)
                         continue;
                     timer.Restart();
-
+                   
+                    //deklarerer snakehead
+                    _snakeHead = _snake.Last();
                     placeNewHeadOfSnake();
+                    outOfField();
+
 
                     if (!_occupiedCoordinate)
                         RemoveTail();
@@ -105,7 +109,8 @@ namespace SnakeMess
         {
             _snake.RemoveAt(0);
             foreach (ConsolePoint consolePointInSnake in _snake)
-                if (ConsolePoint.CompareTwoPoints(_snakeHead, consolePointInSnake))
+                //Forandret fra snakeHead til newSnakeHead i if testen her:
+                if (ConsolePoint.CompareTwoPoints(_newSnakeHead, consolePointInSnake))
                 {
                     _endGame = true;
                     break;
