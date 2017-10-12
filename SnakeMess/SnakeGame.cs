@@ -49,10 +49,12 @@ namespace SnakeMess
                     _snakeHead = _snake.Last();
                     placeNewHeadOfSnake();
                     outOfField();
-
+                    foodIsEaten();
 
                     if (!_occupiedCoordinate)
                         RemoveTail();
+                    
+                    
 
                     if (!_endGame)
                     {
@@ -64,13 +66,21 @@ namespace SnakeMess
                         else
                         {
                             SetFood();
+                            writeObject('$', _food);
                             _occupiedCoordinate = false;
                         }
-
                         _snake.Add(_newSnakeHead);
                         writeObject('@', _newSnakeHead);
                     }
                 }
+            }
+        }
+
+        private void foodIsEaten()
+        {
+            if (ConsolePoint.CompareTwoPoints(_food, _newSnakeHead))
+            {
+                _occupiedCoordinate = true;
             }
         }
 
@@ -93,6 +103,7 @@ namespace SnakeMess
                     break;
             }
         }
+        
 
         private void outOfField()
         {
@@ -109,7 +120,6 @@ namespace SnakeMess
         {
             _snake.RemoveAt(0);
             foreach (ConsolePoint consolePointInSnake in _snake)
-                //Forandret fra snakeHead til newSnakeHead i if testen her:
                 if (ConsolePoint.CompareTwoPoints(_newSnakeHead, consolePointInSnake))
                 {
                     _endGame = true;
@@ -146,11 +156,12 @@ namespace SnakeMess
 
         private void SetFood()
         {
-            bool foodCanBePlaced = true;
+            bool foodCanBePlaced;
             Random rand = new Random();
             int x, y;
             while (true)
             {
+                foodCanBePlaced = true;
                 x = rand.Next(0, _gameConsole.BoardWidth);
                 y = rand.Next(0, _gameConsole.BoardHeight);
                 _food = new ConsolePoint(x, y);
@@ -160,17 +171,21 @@ namespace SnakeMess
                     {
                         if (_snake.Count + 1 >= _gameConsole.BoardWidth * _gameConsole.BoardHeight)
                             _endGame = true;
-                        foodCanBePlaced = false;
+                        else
+                        {
+                            foodCanBePlaced = false;
+                            
+                        }
 
                         break;
                     }
                 }
                 if (foodCanBePlaced)
                 {
+                    _occupiedCoordinate = true;
                     break;
                 }
             }
-            writeObject('$', _food);
         }
 
         private void writeObject(char symbol, ConsolePoint consolePoint)
