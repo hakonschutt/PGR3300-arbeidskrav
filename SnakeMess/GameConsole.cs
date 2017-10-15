@@ -11,12 +11,12 @@ namespace SnakeMess
         {
             Console.CursorVisible = false;
             Console.Title = "Westerdals Oslo ACT - SNAKE";
-            writeConsoleObject('@', 10, 10);
+            WriteConsoleObject('@', 10, 10);
             BoardHeight = Console.WindowHeight;
             BoardWidth = Console.WindowWidth;
         }
         
-        public void writeConsoleObject(char write, int x, int y)
+        public void WriteConsoleObject(char write, int x, int y)
         {
             if (write == '$')
                 Console.ForegroundColor = ConsoleColor.Green;

@@ -46,9 +46,9 @@ namespace SnakeMess
                    
                     //deklarerer snakehead
                     _snakeHead = _snake.Last();
-                    placeNewHeadOfSnake();
-                    outOfField();
-                    foodIsEaten();
+                    PlaceNewHeadOfSnake();
+                    OutOfField();
+                    FoodIsEaten();
 
                     if (!_occupiedCoordinate)
                         RemoveTail();
@@ -57,25 +57,25 @@ namespace SnakeMess
 
                     if (!_endGame)
                     {
-                        writeObject('0', _snakeHead);
+                        WriteObject('0', _snakeHead);
                         if (!_occupiedCoordinate)
                         {
-                            writeObject(' ', _snake.First());
+                            WriteObject(' ', _snake.First());
                         }
                         else
                         {
                             SetFood();
-                            writeObject('$', _food);
+                            WriteObject('$', _food);
                             _occupiedCoordinate = false;
                         }
                         _snake.Add(_newSnakeHead);
-                        writeObject('@', _newSnakeHead);
+                        WriteObject('@', _newSnakeHead);
                     }
                 }
             }
         }
 
-        private void foodIsEaten()
+        private void FoodIsEaten()
         {
             if (ConsolePoint.CompareTwoPoints(_food, _newSnakeHead))
             {
@@ -83,7 +83,7 @@ namespace SnakeMess
             }
         }
 
-        private void placeNewHeadOfSnake()
+        private void PlaceNewHeadOfSnake()
         {
             _newSnakeHead = new ConsolePoint(_snake.Last());
             switch (_direction)
@@ -104,7 +104,7 @@ namespace SnakeMess
         }
         
 
-        private void outOfField()
+        private void OutOfField()
         {
             bool legalBoardWidth = _newSnakeHead.X < 0 || _newSnakeHead.X >= _gameConsole.BoardWidth;
             bool legalBoardHeight = _newSnakeHead.Y < 0 || _newSnakeHead.Y >= _gameConsole.BoardHeight;
@@ -183,9 +183,9 @@ namespace SnakeMess
             }
         }
 
-        private void writeObject(char symbol, ConsolePoint consolePoint)
+        private void WriteObject(char symbol, ConsolePoint consolePoint)
         {
-            _gameConsole.writeConsoleObject(symbol, consolePoint.X, consolePoint.Y);
+            _gameConsole.WriteConsoleObject(symbol, consolePoint.X, consolePoint.Y);
         }
     }
 }
