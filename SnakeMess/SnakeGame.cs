@@ -30,7 +30,6 @@ namespace SnakeMess
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            //bool elapsedTime;
 
             while (!_endGame)
             {
@@ -171,12 +170,8 @@ namespace SnakeMess
                     {
                         if (_snake.Count + 1 >= _gameConsole.BoardWidth * _gameConsole.BoardHeight)
                             _endGame = true;
-                        else
-                        {
-                            foodCanBePlaced = false;
-                            
-                        }
-
+                        
+                        foodCanBePlaced = false;
                         break;
                     }
                 }

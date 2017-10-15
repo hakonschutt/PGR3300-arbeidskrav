@@ -22,7 +22,6 @@ namespace SnakeMess
                 Console.ForegroundColor = ConsoleColor.Green;
             else
                 Console.ForegroundColor = ConsoleColor.Yellow;
-            //TODO gjøre slik denne verdien ikke kan settes i minus eller uten for consollen
             Console.SetCursorPosition(x, y);
             Console.Write(write);
             

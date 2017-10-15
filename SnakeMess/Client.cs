@@ -7,7 +7,6 @@ namespace SnakeMess
         public static void Main(string[] args)
         {
             SnakeGame game = new SnakeGame();
-            Console.ReadKey(true);
         }
     }
 }
